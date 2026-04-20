@@ -17,6 +17,11 @@
 # Get the directory of this vendorsetup.sh script
 CURRENT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" &> /dev/null && pwd)"
 
-bash bootable/aaropa/download.sh --with-newinstaller
-bash bootable/newinstaller/download.sh
+if [ "$USE_NEWINSTALLER" == "true" ]; then
+    bash bootable/aaropa/download.sh --with-newinstaller
+    bash bootable/newinstaller-ng/download.sh
+else
+    bash bootable/aaropa/download.sh
+fi
+
 bash ${CURRENT_DIR}/download_sof-firmware.sh
